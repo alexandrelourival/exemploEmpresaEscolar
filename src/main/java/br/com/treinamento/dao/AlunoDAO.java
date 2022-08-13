@@ -19,10 +19,19 @@ public class AlunoDAO {
 		this.em.persist(aluno);
 		this.em.getTransaction().commit();
 	}
-
+	
+	public void atualizar(Aluno aluno) {
+		this.em.getTransaction().begin();
+		aluno = this.em.merge(aluno);
+		this.em.persist(aluno);
+		this.em.getTransaction().commit();
+	}
+	
 	public void remover(Aluno aluno) {
+		this.em.getTransaction().begin();
 		aluno = this.em.merge(aluno);
 		this.em.remove(aluno);
+		this.em.getTransaction().commit();
 	}
 
 	public List<Aluno> consultarTodas() {

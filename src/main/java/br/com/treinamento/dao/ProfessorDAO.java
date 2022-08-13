@@ -21,9 +21,18 @@ public class ProfessorDAO {
 		
 	}
 	
+	public void atualizar(Professor professor) {
+		this.em.getTransaction().begin();
+		professor = this.em.merge(professor);
+		this.em.persist(professor);
+		this.em.getTransaction().commit();
+	}
+	
 	public void remover(Professor professor) {
+		this.em.getTransaction().begin();
 		professor = this.em.merge(professor);
 		this.em.remove(professor);
+		this.em.getTransaction().commit();
 	}
 	
 	public List<Professor> consultarTodas(){

@@ -1,7 +1,5 @@
 package br.com.treinamento.teste;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 
 import br.com.treinamento.dao.AlunoDAO;
@@ -12,12 +10,7 @@ import br.com.treinamento.dao.JPAUtil;
 import br.com.treinamento.dao.PeriodoCursoDAO;
 import br.com.treinamento.dao.ProfessorDAO;
 import br.com.treinamento.dao.UnidadeEscolaDAO;
-import br.com.treinamento.modelo.Aluno;
 import br.com.treinamento.modelo.Curso;
-import br.com.treinamento.modelo.DisciplinaOferecida;
-import br.com.treinamento.modelo.Empresa;
-import br.com.treinamento.modelo.PeriodoCurso;
-import br.com.treinamento.modelo.Professor;
 import br.com.treinamento.modelo.UnidadeEscola;
 
 public class TesteEmpresa {
@@ -56,14 +49,14 @@ public class TesteEmpresa {
 		PeriodoCursoDAO periodoCursoDAO = new PeriodoCursoDAO(em);
 		DisciplinaOferecidaDAO disciplinaOferecidaDAO = new DisciplinaOferecidaDAO(em);
 
+		// Cadastro de curso em unidade existente
 		/*
-		 * Cadastro de curso em unidade existente Curso curso = new
-		 * Curso("Frontend Developer"); UnidadeEscola unidadeEscola =
+		 * Curso curso = new Curso("Fullstack Developer"); UnidadeEscola unidadeEscola =
 		 * unidadeEscolaDAO.consultarUnidadeEscolaPorId(2L);
 		 * unidadeEscola.getCursosUnidade().add(curso);
 		 * curso.getUnidadesEscolares().add(unidadeEscola);
 		 * 
-		 * unidadeEscolaDAO.cadastrar(unidadeEscola);
+		 * unidadeEscolaDAO.atualizar(unidadeEscola);
 		 */
 
 		// Cadastro

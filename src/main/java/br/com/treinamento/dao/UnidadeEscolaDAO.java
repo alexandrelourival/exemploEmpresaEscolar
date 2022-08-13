@@ -22,21 +22,30 @@ public class UnidadeEscolaDAO {
 		this.em.getTransaction().commit();
 	}
 
+	public void atualizar(UnidadeEscola unidadeEscola) {
+		this.em.getTransaction().begin();
+		unidadeEscola = this.em.merge(unidadeEscola);
+		this.em.persist(unidadeEscola);
+		this.em.getTransaction().commit();
+	}
+
 	public void remover(UnidadeEscola unidadeEscola) {
+		this.em.getTransaction().begin();
 		unidadeEscola = this.em.merge(unidadeEscola);
 		this.em.remove(unidadeEscola);
+		this.em.getTransaction().commit();
 	}
 
 	public List<UnidadeEscola> consultarTodas() {
 		String query = "SELECT uE FROM UnidadeEscola uE";
 		return this.em.createQuery(query, UnidadeEscola.class).getResultList();
 	}
-	
+
 	public UnidadeEscola consultarUnidadeEscolaPorId(Long id) {
 		String query = "SELECT uE FROM UnidadeEscola uE WHERE uE.id = :id";
 		return this.em.createQuery(query, UnidadeEscola.class).setParameter("id", id).getSingleResult();
 	}
-	
+
 	public UnidadeEscola consultarUnidadeEscolaPorNome(String nome) {
 		String query = "SELECT uE FROM UnidadeEscola uE WHERE uE.nome = :nome";
 		return this.em.createQuery(query, UnidadeEscola.class).setParameter("nome", nome).getSingleResult();
@@ -56,16 +65,16 @@ public class UnidadeEscolaDAO {
 
 		UnidadeEscola unidadeEscola = this.em.createQuery(query, UnidadeEscola.class).setParameter("id", id)
 				.getSingleResult();
-		
+
 		return unidadeEscola.getProfessores();
 	}
-	
+
 	public List<Curso> consultarCursosUnidadePorId(Long id) {
 		String query = "SELECT uE FROM UnidadeEscola uE WHERE uE.id = :id";
 
 		UnidadeEscola unidadeEscola = this.em.createQuery(query, UnidadeEscola.class).setParameter("id", id)
 				.getSingleResult();
-		
+
 		return unidadeEscola.getCursosUnidade();
 	}
 }

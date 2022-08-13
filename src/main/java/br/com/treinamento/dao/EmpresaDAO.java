@@ -21,9 +21,18 @@ public class EmpresaDAO {
 		this.em.getTransaction().commit();
 	}
 
+	public void atualizar(Empresa empresa) {
+		this.em.getTransaction().begin();
+		empresa = this.em.merge(empresa);
+		this.em.persist(empresa);
+		this.em.getTransaction().commit();
+	}
+	
 	public void remover(Empresa empresa) {
+		this.em.getTransaction().begin();
 		empresa = this.em.merge(empresa);
 		this.em.remove(empresa);
+		this.em.getTransaction().commit();
 	}
 
 	public List<Empresa> consultarTodas() {

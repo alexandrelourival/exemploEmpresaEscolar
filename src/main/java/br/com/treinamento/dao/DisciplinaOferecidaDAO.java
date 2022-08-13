@@ -20,9 +20,18 @@ public class DisciplinaOferecidaDAO {
 		this.em.getTransaction().commit();
 	}
 
+	public void atualizar(DisciplinaOferecida disciplinaOferecida) {
+		this.em.getTransaction().begin();
+		disciplinaOferecida = this.em.merge(disciplinaOferecida);
+		this.em.persist(disciplinaOferecida);
+		this.em.getTransaction().commit();
+	}
+	
 	public void remover(DisciplinaOferecida disciplinaOferecida) {
+		this.em.getTransaction().begin();
 		disciplinaOferecida = this.em.merge(disciplinaOferecida);
 		this.em.remove(disciplinaOferecida);
+		this.em.getTransaction().commit();
 	}
 
 	public List<DisciplinaOferecida> consultarTodas() {

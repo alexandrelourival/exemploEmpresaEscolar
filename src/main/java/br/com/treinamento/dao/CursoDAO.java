@@ -22,9 +22,18 @@ public class CursoDAO {
 		this.em.getTransaction().commit();
 	}
 
+	public void atualizar(Curso curso) {
+		this.em.getTransaction().begin();
+		curso = this.em.merge(curso);
+		this.em.persist(curso);
+		this.em.getTransaction().commit();
+	}
+	
 	public void remover(Curso curso) {
+		this.em.getTransaction().begin();
 		curso = this.em.merge(curso);
 		this.em.remove(curso);
+		this.em.getTransaction().commit();
 	}
 
 	public List<Curso> consultarTodas() {

@@ -15,15 +15,24 @@ public class PeriodoCursoDAO {
 		this.em = em;
 	}
 
-	public void cadastrar(PeriodoCurso curso) {
+	public void cadastrar(PeriodoCurso periodoCurso) {
 		this.em.getTransaction().begin();
-		this.em.persist(curso);
+		this.em.persist(periodoCurso);
 		this.em.getTransaction().commit();
 	}
 
-	public void remover(PeriodoCurso curso) {
-		curso = this.em.merge(curso);
-		this.em.remove(curso);
+	public void atualizar(PeriodoCurso periodoCurso) {
+		this.em.getTransaction().begin();
+		periodoCurso = this.em.merge(periodoCurso);
+		this.em.persist(periodoCurso);
+		this.em.getTransaction().commit();
+	}
+
+	public void remover(PeriodoCurso periodoCurso) {
+		this.em.getTransaction().begin();
+		periodoCurso = this.em.merge(periodoCurso);
+		this.em.remove(periodoCurso);
+		this.em.getTransaction().commit();
 	}
 
 	public List<PeriodoCurso> consultarTodas() {
@@ -55,11 +64,12 @@ public class PeriodoCursoDAO {
 	public Curso consultarCursoPeriodoCursoPorNome(String nome) {
 		String query = "SELECT pC FROM PeriodoCurso pC WHERE pC.id = :nome";
 
-		PeriodoCurso periodoCurso = this.em.createQuery(query, PeriodoCurso.class).setParameter("nome", nome).getSingleResult();
-		
+		PeriodoCurso periodoCurso = this.em.createQuery(query, PeriodoCurso.class).setParameter("nome", nome)
+				.getSingleResult();
+
 		return periodoCurso.getCurso();
 	}
-	
+
 	public List<DisciplinaOferecida> consultarDisciplinasPeriodoCursoPorId(Long id) {
 		String query = "SELECT pC FROM PeriodoCurso pC WHERE pC.id = :id";
 
@@ -72,8 +82,9 @@ public class PeriodoCursoDAO {
 	public List<DisciplinaOferecida> consultarDisciplinasPeriodoCursoPorNome(String nome) {
 		String query = "SELECT pC FROM PeriodoCurso pC WHERE pC.id = :nome";
 
-		PeriodoCurso periodoCurso = this.em.createQuery(query, PeriodoCurso.class).setParameter("nome", nome).getSingleResult();
-		
+		PeriodoCurso periodoCurso = this.em.createQuery(query, PeriodoCurso.class).setParameter("nome", nome)
+				.getSingleResult();
+
 		return periodoCurso.getDisciplinasOferecidas();
 	}
 
